@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>UNO Game vs Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Экран выбора ботов -->
+<div id="bot-selection-screen">
+    <h1>Выберите количество ботов</h1>
+    <div class="bot-options">
+        <button class="btn" data-bots="1">1 Бот</button>
+        <button class="btn" data-bots="2">2 Бота</button>
+        <button class="btn" data-bots="3">3 Бота</button>
+    </div>
+</div>
+
+<!-- Экран конца игры -->
+<div id="game-over">
+    <div id="game-over-message">Вы выиграли! 🎉</div>
+    <button id="new-game-btn" class="btn">Новая игра</button>
+</div>
+
+<!-- Выбор цвета при wild/+4 -->
+<div id="color-picker">
+    <h3>Выберите цвет</h3>
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <div class="color-option red" data-color="red"></div>
+        <div class="color-option blue" data-color="blue"></div>
+        <div class="color-option green" data-color="green"></div>
+        <div class="color-option yellow" data-color="yellow"></div>
+    </div>
+</div>
+
+<!-- Игровое поле -->
+<div id="game" style="display: none;">
+    <h1 id="game-title"></h1>
+
+    <div id="opponents-area">
+        <div id="opponent-1-area" class="opponent-area"></div>
+        <div id="opponent-2-area" class="opponent-area"></div>
+        <div id="opponent-3-area" class="opponent-area"></div>
+    </div>
+
+    <div id="center-pile"></div>
+
+    <div id="player-hand"></div>
+
+    <button id="draw-card" class="btn">Взять карту</button>
+
+    <button id="settings-btn" class="btn">⚙️ Настройки</button>
+</div>
+
+<!-- Кнопка возврата на портфолио -->
+<a href="../../whole_index/index.html" class="back-link">🏠 Вернуться на портфолио</a>
+
+<!-- Меню настроек -->
+<div id="settings-menu">
+    <h2>Настройки</h2>
+    <label><input type="checkbox" id="sound-toggle" checked> Звуки</label>
+    <button class="btn" disabled>Поставить свои правила</button>
+    <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">скоро...</p>
+    <button id="close-settings" class="btn"
+            style="border-color: var(--accent-3); color: var(--accent-3); margin-top: 10px;">Закрыть
+    </button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

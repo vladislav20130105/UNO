@@ -1,0 +1,419 @@
+:root {
+    --bg: #090912;
+    --card-bg: #0f0f1a;
+    --accent-1: #00f5d4;
+    --accent-2: #f15bb5;
+    --accent-3: #ff9e00;
+    --text: #e0e0ff;
+    --text-muted: #8a8aa0;
+    --border: #2a2a45;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Orbitron', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* === ЭКРАН ВЫБОРА БОТОВ === */
+#bot-selection-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.bot-options {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* === ИГРОВАЯ ЗОНА === */
+#game {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin: 20px 0 30px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 300% 300%;
+    animation: gradientShift 6s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* === ЦЕНТР === */
+#center-pile {
+    width: 80px;
+    height: 120px;
+    margin: 25px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--card-bg);
+}
+
+#center-pile.red {
+    background: #ff3b30;
+}
+
+#center-pile.blue {
+    background: #007aff;
+}
+
+#center-pile.green {
+    background: #34c759;
+}
+
+#center-pile.yellow {
+    background: #ffcc00;
+    color: black;
+    text-shadow: none;
+}
+
+#center-pile.wild {
+    background: black;
+}
+
+/* === РУКА ИГРОКА === */
+#player-hand {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 25px 0;
+    min-height: 130px;
+}
+
+.card {
+    width: 60px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: white;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(42, 42, 69, 0.5);
+    background: var(--card-bg);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.12);
+    z-index: 5;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 16px currentColor;
+    border-color: var(--accent-1);
+}
+
+.card.red {
+    background: #ff3b30;
+}
+
+.card.blue {
+    background: #007aff;
+}
+
+.card.green {
+    background: #34c759;
+}
+
+.card.yellow {
+    background: #ffcc00;
+    color: black;
+    text-shadow: none;
+}
+
+.card.wild {
+    background: black;
+}
+
+/* === РУКА БОТА === */
+#opponents-area {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+
+.opponent-area {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    min-height: 100px;
+    flex-wrap: wrap;
+}
+
+[data-bots="1"] .opponent-area {
+    width: 100%;
+}
+
+[data-bots="2"] .opponent-area {
+    width: 45%;
+}
+
+[data-bots="3"] .opponent-area {
+    width: 30%;
+}
+
+.opponent-card {
+    width: 50px;
+    height: 80px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s;
+}
+
+.opponent-card:hover {
+    transform: scale(1.05);
+}
+
+/* === КНОПКИ === */
+.btn {
+    background: transparent;
+    color: var(--accent-1);
+    border: 2px solid var(--accent-1);
+    border-radius: 12px;
+    padding: 12px 24px;
+    margin: 10px 5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    background: var(--accent-1);
+    color: var(--bg);
+    box-shadow: 0 0 20px rgba(0, 245, 212, 0.7);
+    transform: translateY(-3px) scale(1.03);
+}
+
+#draw-card {
+    background: transparent;
+    border-color: var(--accent-2);
+    color: var(--accent-2);
+}
+
+#draw-card:hover {
+    background: var(--accent-2);
+    color: var(--bg);
+    box-shadow: 0 0 20px rgba(241, 91, 181, 0.7);
+}
+
+/* === КНОПКА "ВЕРНУТЬСЯ НА ПОРТФОЛИО" === */
+.back-link {
+    display: block;
+    width: fit-content;
+    margin: 1px auto 0 auto; /* верхний отступ 25px, остальное — auto для центрирования */
+    padding: 12px 30px;
+    color: var(--accent-1);
+    text-decoration: none;
+    font-size: 1.1rem;
+    border: 2px solid var(--accent-1);
+    border-radius: 30px;
+    transition: all 0.3s;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.back-link:hover {
+    background: var(--accent-1);
+    color: var(--bg);
+    box-shadow: 0 0 20px rgba(0, 245, 212, 0.7);
+    transform: translateY(-2px);
+}
+
+/* === НАСТРОЙКИ === */
+#settings-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    padding: 25px;
+    border: 2px solid var(--accent-2);
+    border-radius: 16px;
+    z-index: 100;
+    box-shadow: 0 0 30px rgba(241, 91, 181, 0.4),
+    0 10px 25px rgba(0, 0, 0, 0.6);
+    width: 90%;
+    max-width: 400px;
+}
+
+#settings-menu h2 {
+    color: var(--accent-1);
+    margin-top: 0;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#settings-menu label {
+    display: block;
+    margin: 14px 0;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+#settings-menu input {
+    margin-right: 10px;
+    accent-color: var(--accent-1);
+}
+
+/* === ГЕЙМ ОВЕР === */
+#game-over {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(9, 9, 18, 0.95);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 200;
+    border: 1px solid rgba(42, 42, 69, 0.5);
+}
+
+#game-over-message {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+/* === ВЫБОР ЦВЕТА (WILD) === */
+#color-picker {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 300;
+    background: var(--card-bg);
+    padding: 24px;
+    border: 2px solid var(--accent-2);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(241, 91, 181, 0.5),
+    0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+#color-picker h3 {
+    color: var(--accent-1);
+    margin-top: 0;
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+}
+
+.color-option {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.color-option:hover {
+    transform: scale(1.25) translateY(-5px);
+    box-shadow: 0 0 20px white;
+}
+
+.color-option.red {
+    background: #ff3b30;
+}
+
+.color-option.blue {
+    background: #007aff;
+}
+
+.color-option.green {
+    background: #34c759;
+}
+
+.color-option.yellow {
+    background: #ffcc00;
+}
+
+#back-to-portfolio {
+    display: inline-block;
+    background: transparent;
+    color: var(--accent-3); /* Оранжевый акцент */
+    border: 2px solid var(--accent-3);
+    border-radius: 12px;
+    padding: 12px 24px;
+    margin: 20px auto;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+#back-to-portfolio:hover {
+    background: var(--accent-3);
+    color: var(--bg);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 158, 0, 0.7); /* Неоновое свечение оранжевого */
+}
